@@ -1,0 +1,16 @@
+with pID as
+(
+SELECT *
+FROM `physionet-data.mimiciii_derived.kdigo_stages` st
+LEFT JOIN `physionet-data.mimiciii_derived.adenosine_durations` ab
+ON st.icustay_id =ab.ICUSTAY_ID
+LEFT JOIN `physionet-data.mimiciii_derived.apsiii` an
+ON st.icustay_id =an.icustay_id 
+LEFT JOIN `physionet-data.mimiciii_derived.abx_micro_poe` it
+ON st.icustay_id =it.ICUSTAY_ID
+)
+SELECT  creat,aki_stage_uo, aki_stage,apsiii,apsiii_prob,hr_score,meanbp_score,
+temp_score,resprate_score,pao2_aado2_score,hematocrit_score,wbc_score,creatinine_score,
+uo_score,bun_score,sodium_score,albumin_score,bilirubin_score,glucose_score,
+acidbase_score,gcs_score,specimen,antibiotic_name
+FROM pID LIMIT 1000000

@@ -1,0 +1,11 @@
+with pID as
+(
+SELECT *
+FROM `physionet-data.mimiciii_derived.kdigo_stages` st
+LEFT JOIN `physionet-data.mimiciii_derived.fluid_balance` ab
+ON st.icustay_id =ab.ICUSTAY_ID
+LEFT JOIN `physionet-data.mimiciii_derived.fluid_balance_staging` an
+ON st.icustay_id =an.icustay_id 
+)
+SELECT 	aki_stage,rate_in,rate_out,rate_blood_product,rate_colloid,rate_crystalloid,rate_dialysis_input,rate_dialysis_output,rate_drain,rate_irrigant,rate_oral,rate_general_intake,rate_general_output,rate_nutrition,rate_uo,leadtime_seconds,rn
+FROM pID LIMIT 100000

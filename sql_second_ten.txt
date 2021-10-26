@@ -1,0 +1,11 @@
+with pID as
+(
+SELECT *
+FROM `physionet-data.mimiciii_derived.kdigo_stages` st
+LEFT JOIN `physionet-data.mimiciii_derived.blood_culture_icu_admit` ab
+ON st.icustay_id =ab.ICUSTAY_ID
+LEFT JOIN `physionet-data.mimiciii_derived.blood_gas_first_day` an
+ON st.icustay_id =an.icustay_id 
+)
+SELECT aki_stage,uo_rt_6hr,uo_rt_12hr,uo_rt_24hr,aki_stage_uo,aki_stage,baseexcess,bicarbonate,totalco2,carboxyhemoglobin,chloride,calcium,glucose,hematocrit,lactate,pco2,ph,po2
+FROM pID LIMIT 100000
